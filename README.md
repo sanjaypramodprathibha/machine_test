@@ -256,35 +256,7 @@ The project uses SQLite by default (configured in `settings.py`). To use Postgre
 2. Install PostgreSQL and create a database
 3. Update the database configuration
 
-## Project Structure
 
-```
-machine_test_project/
-├── manage.py
-├── requirements.txt
-├── README.md
-├── machine_test_project/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── users/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── models.py
-│   ├── serializers.py
-│   ├── views.py
-│   ├── urls.py
-│   └── migrations/
-└── expenses/
-    ├── __init__.py
-    ├── admin.py
-    ├── models.py
-    ├── serializers.py
-    ├── views.py
-    ├── urls.py
-    └── migrations/
-```
 
 ## Testing the API
 
