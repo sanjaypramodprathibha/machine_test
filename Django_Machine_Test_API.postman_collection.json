@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "django-machine-test-api",
+		"name": "Django Machine Test API",
+		"description": "Django REST API with User Management and Expense Tracking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Register User (Valid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john_doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"password_confirm\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/register/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register",
+								""
+							]
+						},
+						"description": "Register a new user with valid data"
+					}
+				},
+				{
+					"name": "Register User (Validation Errors)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"ab\",\n    \"email\": \"invalid-email\",\n    \"password\": \"short\",\n    \"password_confirm\": \"different\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/register/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register",
+								""
+							]
+						},
+						"description": "Show validation errors for invalid data"
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						},
+						"description": "Get all registered users"
+					}
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}",
+								""
+							]
+						},
+						"description": "Get specific user by ID"
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}",
+								""
+							]
+						},
+						"description": "Delete user by ID"
+					}
+				}
+			],
+			"description": "User registration and management endpoints"
+		},
+		{
+			"name": "Category Management",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								""
+							]
+						},
+						"description": "Get all expense categories"
+					}
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Healthcare\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/categories/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								""
+							]
+						},
+						"description": "Create a new expense category"
+					}
+				}
+			],
+			"description": "Expense category management endpoints"
+		},
+		{
+			"name": "Expense Management",
+			"item": [
+				{
+					"name": "Get All Expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/expenses/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"expenses",
+								""
+							]
+						},
+						"description": "Get all expenses with category and user relationships"
+					}
+				},
+				{
+					"name": "Create Expense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Doctor visit\",\n    \"amount\": \"100.00\",\n    \"category\": 1,\n    \"date\": \"2025-10-09\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/expenses/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"expenses",
+								""
+							]
+						},
+						"description": "Create a new expense"
+					}
+				},
+				{
+					"name": "Expense Summary (Main Feature)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/expenses/summary/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"expenses",
+								"summary",
+								""
+							]
+						},
+						"description": "Get expense summary grouped by category using Django ORM aggregation"
+					}
+				}
+			],
+			"description": "Expense management and summary endpoints"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
