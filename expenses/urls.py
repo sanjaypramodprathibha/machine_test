@@ -1,8 +1,17 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include
+# Import the redirect view
+from django.views.generic import RedirectView
+
+# ... other imports (router, views)
 
 urlpatterns = [
-    path('categories/', views.CategoryListView.as_view(), name='category-list'),
-    path('expenses/', views.ExpenseListView.as_view(), name='expense-list'),
-    path('expenses/summary/', views.expense_summary, name='expense-summary'),
+    # Add a redirect for the root path
+    path('', RedirectView.as_view(url='/users/', permanent=False)),
+    
+    path('admin/', admin.site.urls),
+    # ... rest of your paths
+    path('register/', RegisterUserView.as_view()),
+    path('', include(router.urls)), # users endpoints
+    path('expenses/summary/', ExpenseSummaryView.as_view()),
 ]
